@@ -188,3 +188,21 @@ docs/_build/
 
 # mkdocs
 /site
+
+# --- LocoManiLab additions ---
+pretrained_ckpt/
+outputs/
+runs/
+wandb/
+*.pt
+*.pth
+*.safetensors
+.venv*/
+xr1/assets/config.py
+xr1/data/
+
+# Generated per-dataset hydra data configs (lab convert regenerates them; each
+# embeds a (30,80) mean/std + (1,60) quantile table for one dataset).
+xr1/configs/data/locomanilab_*.yaml
+# Older generated configurations remain local.
+xr1/configs/data/soma_*.yaml

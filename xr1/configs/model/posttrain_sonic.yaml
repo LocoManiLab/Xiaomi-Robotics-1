@@ -1,0 +1,25 @@
+# @package _global_
+
+# Unitree G1 SONIC post-training (added for LocoManiLab integration).
+#
+# Differs from posttrain.yaml in exactly two places:
+#   action_dim: 80        -- motion_token(64) + hands(7+7) + 2 reserved. Requires a
+#                            checkpoint widened by tools/widen_action_dim.py.
+#   freq_excluded_dims: []-- upstream excludes [17,18,19] (base velocity) from the
+#                            FFT term of the flow loss because that channel is noisy.
+#                            The SONIC action space has no base-velocity channel and
+#                            the motion tokens are smooth latents, so nothing is
+#                            excluded.
+model:
+  type: "BaseRunner"
+  params:
+    pretrained: ???
+    model:
+      type: "xr1"
+      freq_coefficient: 1.0
+      freq_excluded_dims: []
+      ffn_gradient_checkpointing: true
+      async_train: true
+      action_dim: 80
+      state_dim: 60
+      action_length: 30

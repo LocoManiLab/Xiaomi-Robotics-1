@@ -201,10 +201,19 @@ class xr1(nn.Module):
         freq_excluded_dims=None,
         ffn_gradient_checkpointing=True,
         async_train=True,
+        action_dim=60,
+        state_dim=60,
+        action_length=30,
     ):
         super().__init__()
-        self.state_shape = (1, 60)
-        self.action_shape = (30, 60)
+        # LocoManiLab: the released model is (1, 60) / (30, 60); the G1 SONIC action space
+        # needs 80 action dims, so these are configurable. Defaults keep upstream
+        # behaviour bit-for-bit. Changing action_dim reshapes action_projector /
+        # action_output_layer / action_projector_choice -- run
+        # `tools/widen_action_dim.py` on the released checkpoint first, or
+        # BaseRunner.configure_model will fail to load it.
+        self.state_shape = (1, state_dim)
+        self.action_shape = (action_length, action_dim)
         self.freq_coefficient = float(freq_coefficient)
         self.freq_excluded_dims = list([17, 18, 19] if freq_excluded_dims is None else freq_excluded_dims)
         self.ffn_gradient_checkpointing = bool(ffn_gradient_checkpointing)

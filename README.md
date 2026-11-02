@@ -1,3 +1,23 @@
+> [!NOTE]
+> **LocoManiLab modifications.** This repository is a fork of
+> [XiaomiRobotics/Xiaomi-Robotics-1](https://github.com/XiaomiRobotics/Xiaomi-Robotics-1) at commit
+> `556cca33963a2b36d835a40374c3b4c8eef68401`, modified for the
+> [LocoManiLab](https://github.com/Gamma-Robot/LocoManiLab) benchmark (Gamma Robotics).
+> The original Apache-2.0 [LICENSE](LICENSE) applies; the changes below are provided under the same license.
+>
+> Summary of changes:
+> - A Unitree G1 SONIC action space for XR-1 post-training: JSON dataset/datamodule, model config,
+>   SONIC utilities, data converters, normalization-statistics and action-dimension widening tools.
+> - A GR00T-protocol compatible policy server (`deploy/run_xr1_server.py`) with prefix-conditioned serving,
+>   used by the LocoManiLab runtime.
+>
+> Added files: `deploy/run_xr1_server.py`, `tests/test_locomanilab_entrypoints.py`,
+> `xr1/configs/model/posttrain_sonic.yaml`, `xr1/mibot/data/datamodule/sonic_datamodule.py`,
+> `xr1/mibot/data/datasets/sonic_json_dataset.py`, `xr1/mibot/utils/sonic.py`,
+> `xr1/scripts/data/compute_xr1_stats.py`, `xr1/scripts/data/locomanilab_sonic_to_xr1_json.py`,
+> `xr1/scripts/data/soma_sonic_to_xr1_json.py` (legacy-name wrapper), `xr1/tools/widen_action_dim.py`.
+> Modified files: `.gitignore`, `xr1/mibot/data/__init__.py`, `xr1/mibot/models/VLA/XR1.py`, `README.md` (this section).
+
 <div align="center">
 
   # Xiaomi-Robotics-1
